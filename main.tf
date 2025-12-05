@@ -123,3 +123,11 @@ resource "google_compute_global_forwarding_rule" "default" {
   target                = google_compute_target_http_proxy.default.id
   ip_address            = google_compute_global_address.default.address
 }
+
+
+resource "google_storage_bucket" "truebucket" {
+    count = var.yes-or-no == "yes" ? 1 : 0
+    name     = "${var.project-id}-mybucket-12345"
+    location = var.region
+  
+}

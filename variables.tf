@@ -17,3 +17,6 @@ variable "network-name" {
     default = "default"
   
 }
+variable "yes-or-no" {
+    type = string
+}
