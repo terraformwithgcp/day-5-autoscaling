@@ -66,3 +66,19 @@ resource "google_compute_health_check" "http-check" {
     }
   
 }
+
+resource "google_compute_region_autoscaler" "myapp-autoscaler" {
+  name   = "${var.image-name}autoscaler"
+  region = var.region
+  target = google_compute_region_instance_group_manager.myappgroup1.self_link
+
+  autoscaling_policy {
+    max_replicas    = 10
+    min_replicas    = 3
+    cooldown_period = 60
+
+    cpu_utilization {
+      target = 0.6
+    }
+  }
+}
